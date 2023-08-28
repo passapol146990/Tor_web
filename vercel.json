@@ -1,3 +1,6 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "env": {
+    "MY_KEY": "this is the value",
+    "SECRET": "@my-secret-name"
   }
+}
