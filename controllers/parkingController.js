@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
     //res.render('parking')
-    let query ="SELECT * FROM users ORDER BY id ASC"
+    let query ="SELECT * FROM user ORDER BY id ASC"
         // execute query
         db.query(query, (err, result) => {
             if (err) {
