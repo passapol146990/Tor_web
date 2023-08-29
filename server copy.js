@@ -120,6 +120,8 @@ app.use(fileUpload()); // configure fileupload
 // ///////////////////////////////////////////////////////////////////////////////////////////////
 // npm i crypto-js
 const crypto = require('crypto-js');
+const cookieSession = require('cookie-session');
+const user = require('./routes/user');
 
 function sha3_256(input) {
     const hash = crypto.SHA3(input, { outputLength: 256 });
@@ -150,8 +152,7 @@ app.get('/login',(req, res, next)=> {
 
 app.get('/api-token/:token', (req, res) => {
   const token = req.params.token;
-  const DBtable = 'token_table'  // ชื่อ table ในฐานข้อมูล
-  const sql = `SELECT * FROM ${DBtable} WHERE token = ?`;
+  const sql = `SELECT * FROM token WHERE token = ?`;
   db.query(sql, [token], (err, results) => {
     if (err) {
       res.status(500).json(false)
@@ -216,6 +217,22 @@ app.post('/auth/login2',async (req, res) => {
   });
 });
 // ///////////////////////////////////////////////////////////////////////////////////////////////
+var userInChat = []
+// Apage_Chat
+app.post('/chatlogin',(req,res)=>{
+  console.log(req.params.username)
+  userInChat.push(req.params.username)
+  res.redirect('/apageChat')
+})
+
+app.get('/login_chat',(req,res)=>{
+  res.render('index.ejs') // Respond with a success message
+})
+
+
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////
+
 app.get('/weather', weatherController)
 app.get('/parking', parkingController)
 app.get('/admin', adminController)
