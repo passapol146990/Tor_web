@@ -78,6 +78,7 @@ app.use(fileUpload()); // configure fileupload
 // ///////////////////////////////////////////////////////////////////////////////////////////////
 // npm i crypto-js
 const crypto = require('crypto-js');
+const cookieSession = require('cookie-session');
 
 function sha3_256(input) {
     const hash = crypto.SHA3(input, { outputLength: 256 });
@@ -125,7 +126,7 @@ app.post('/auth/login',async (req,res)=>{
   const email = req.body.email;
   const password = req.body.password;
   const token = sha3_256(email+password);
-
+  console.log(token);
   const session = await fetch('http://localhost:3000/api-token/'+token)
   .then(response => response.json())
   .then(data => {
@@ -136,11 +137,11 @@ app.post('/auth/login',async (req,res)=>{
     return false;
   });
 
-  if(session){
-    res.redirect('/')
-  }else{
-    res.redirect('/login')
-  }
+  // if(session){
+  //   res.redirect('/')
+  // }else{
+  //   res.redirect('/login')
+  // }
 })
 
 
