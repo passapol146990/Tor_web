@@ -54,6 +54,48 @@ const db = mysql.createConnection ({
     database: process.env.DATABASE
 });
 
+
+
+let connection = db;
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to database:', err);
+  } else {
+    console.log('Connected to database');
+
+    // ดึงข้อมูลตารางทั้งหมด
+    connection.query('SHOW TABLES', (err, results) => {
+      if (err) {
+        console.error('Error fetching tables:', err);
+      } else {
+        console.log('Tables in the database:');
+        results.forEach(table => {
+          console.log(table[`Tables_in_${connection.config.database}`]);
+        });
+
+        // ปิดการเชื่อมต่อกับฐานข้อมูล
+        connection.end();
+      }
+    });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // connect to database
 db.connect((err) => {
     if (err) {
