@@ -1,0 +1,32 @@
+.dark{
+    background: #242524;
+    color: #39ff14 ;
+}
+
+@keyframes change-color {
+    0% {
+        color: red;
+    }
+    25% {
+        color: blue;
+    }
+    50% {
+        color: #39ff14;
+    }
+    75% {
+        color: orange;
+    }
+    100% {
+        color: purple;
+    }
+}
+
+*{
+    animation: change-color 10s infinite;
+}
+
+
+.box-1 a{
+    display: block;
+    margin-bottom: 10px;
+}
